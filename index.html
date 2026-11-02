@@ -50,7 +50,7 @@
     <div class="cta-container" id="activeBookingFlow">
         <div class="inline-pricing"><span id="displayPrice">$49.99 CAD</span> <span data-en="Priority Flat Rate" data-fr="Tarif Fixe Prioritaire">Priority Flat Rate</span><br><button type="button" onclick="safeOpenModal('codeModal')" style="background:none; border:none; color:var(--text-muted); font-size:10px; font-weight:700; text-decoration:underline; cursor:pointer; margin-top:8px;" data-en="HAVE SPURTAN CODE?" data-fr="AVEZ-VOUS UN CODE SPURTAN ?">HAVE SPURTAN CODE?</button></div>
         <div>
-            <!-- READY NOW BUTTON ONLY (NO LATER BUTTON IN UI) -->
+            <!-- STRICTLY READY NOW (NO LATER BUTTON IN UI) -->
             <button class="ready-circle-btn" onclick="openIntercept('now')">
                 <span class="ready-line-1" data-en="READY" data-fr="READY">READY</span>
                 <span class="ready-line-2" data-en="NOW™" data-fr="NOW™">NOW™</span>
@@ -137,7 +137,7 @@
     </div>
 </div>
 
-<!-- READY NOW MODAL (WITH FULL OCCASIONS & EDGE EMBEDDED) -->
+<!-- READY NOW MODAL (WITH EXACT ORIGINAL OCCASIONS + EDGE EMBEDDED) -->
 <div id="verifyModal" class="modal-overlay">
     <div class="modal-card">
         <h3 class="dynamic-header" data-en="Get Ready Now" data-fr="Préparez-vous Maintenant">Get Ready Now</h3>
@@ -151,11 +151,14 @@
                 </div>
             </div>
             
+            <!-- ORIGINAL OCCASIONS DROPDOWN -->
             <select class="modal-input" name="client_occasion" id="occasionSelectNow">
-                <option value="" disabled selected data-en="Select Service / Focus" data-fr="Sélectionnez un service / objectif">Select Service / Focus</option>
-                <option value="Just for You" data-en="Standard Refresh ($49.99) — Just for You" data-fr="Standard Refresh (49,99 $) — Juste pour vous">Standard Refresh ($49.99) — Just for You</option>
-                <option value="Professional" data-en="Standard Refresh ($49.99) — Professional" data-fr="Standard Refresh (49,99 $) — Professionnel">Standard Refresh ($49.99) — Professional</option>
-                <option value="Social" data-en="Standard Refresh ($49.99) — Social" data-fr="Standard Refresh (49,99 $) — Social">Standard Refresh ($49.99) — Social</option>
+                <option value="" disabled selected data-en="Focus / Occasion (Optional)" data-fr="Objectif / Occasion (Optionnel)">Focus / Occasion (Optional)</option>
+                <option value="Just for You" class="gold-tier" data-en="Just for You™ — The Occasion is Me" data-fr="Juste pour vous™ — Je suis l'occasion">Just for You™ — The Occasion is Me</option>
+                <option disabled class="separator">──────────────────</option>
+                <option value="Professional" data-en="Professional — Meeting / Interview / Stage" data-fr="Professionnel — Réunion / Entretien / Scène">Professional — Meeting / Interview / Stage</option>
+                <option value="Social" data-en="Social — Date / Wedding / Night Out" data-fr="Social — Date / Mariage / Sortie">Social — Date / Mariage / Sortie</option>
+                <option value="Life" data-en="Life — Travel / Celebration / Milestone" data-fr="Vie — Voyage / Célébration / Étape">Life — Travel / Celebration / Milestone</option>
                 <option disabled class="separator">──────────────────</option>
                 <option value="SPUR Edge" class="silver-tier" data-en="SPUR Edge™ — 15-Min Refinement ($29.99)" data-fr="SPUR Edge™ — Finition 15-Min (29,99 $)">SPUR Edge™ — 15-Min Refinement ($29.99)</option>
                 <option value="SPUR Reset" class="gold-tier" data-en="SPUR Reset™ — Full Restoration ($69.99)" data-fr="SPUR Reset™ — Restauration Complète (69,99 $)">SPUR Reset™ — Full Restoration ($69.99)</option>
@@ -165,42 +168,6 @@
         </form>
         <button class="modal-close" onclick="closeModals()" data-en="CANCEL" data-fr="ANNULER">CANCEL</button><br>
         <button type="button" class="reset-user-link" id="resetUserBtn" onclick="resetUser()" data-en="Not you? Reset details" data-fr="Pas vous ? Réinitialiser">Not you? Reset details</button>
-    </div>
-</div>
-
-<!-- READY LATER MODAL IN BACKGROUND (WITH FULL OCCASIONS & EDGE EMBEDDED) -->
-<div id="laterModal" class="modal-overlay">
-    <div class="modal-card">
-        <h3 class="dynamic-header" data-en="Plan Ahead" data-fr="Planifier à l'avance">Plan Ahead</h3>
-        <p class="dynamic-desc" data-en="Commit to a scheduled visit. We'll coordinate availability." data-fr="Engagez-vous pour une visite planifiée. Nous coordonnerons la disponibilité.">Commit to a scheduled visit. We'll coordinate availability.</p>
-        <form action="https://formspree.io/f/mjykllwj" method="POST" onsubmit="handleSubmit(event, 'later')">
-            <input type="text" name="_gotcha" style="display:none"><input type="hidden" name="city_location" class="formCityField" value="Vancouver"><input type="hidden" name="dispatch_channel" value="Scheduled Request"><input type="hidden" name="requested_specialist" class="specialistHiddenField" value="Priority Match">
-            <div id="inputFieldsWrapperLater">
-                <div class="contact-fields">
-                    <input type="text" class="modal-input" name="client_name" placeholder="First Name" data-en-placeholder="First Name" data-fr-placeholder="Prénom" required>
-                    <input type="tel" class="modal-input" name="client_phone" placeholder="10 Digit Mobile" data-en-placeholder="10 Digit Mobile" data-fr-placeholder="Mobile à 10 chiffres" pattern="[0-9]{10}" required>
-                </div>
-            </div>
-            
-            <select class="modal-input" name="client_occasion" id="occasionSelectLater">
-                <option value="" disabled selected data-en="Select Service / Focus" data-fr="Sélectionnez un service / objectif">Select Service / Focus</option>
-                <option value="Just for You" data-en="Standard Refresh ($49.99) — Just for You" data-fr="Standard Refresh (49,99 $) — Juste pour vous">Standard Refresh ($49.99) — Just for You</option>
-                <option value="Professional" data-en="Standard Refresh ($49.99) — Professional" data-fr="Standard Refresh (49,99 $) — Professionnel">Standard Refresh ($49.99) — Professional</option>
-                <option value="Social" data-en="Standard Refresh ($49.99) — Social" data-fr="Standard Refresh (49,99 $) — Social">Standard Refresh ($49.99) — Social</option>
-                <option disabled class="separator">──────────────────</option>
-                <option value="SPUR Edge" class="silver-tier" data-en="SPUR Edge™ — 15-Min Refinement ($29.99)" data-fr="SPUR Edge™ — Finition 15-Min (29,99 $)">SPUR Edge™ — 15-Min Refinement ($29.99)</option>
-                <option value="SPUR Reset" class="gold-tier" data-en="SPUR Reset™ — Full Restoration ($69.99)" data-fr="SPUR Reset™ — Restauration Complète (69,99 $)">SPUR Reset™ — Full Restoration ($69.99)</option>
-            </select>
-            
-            <input type="date" class="modal-input" name="requested_date" id="laterDateInput" required>
-            <select class="modal-input" name="requested_time" required>
-                <option value="" disabled selected data-en="Select Preferred Time" data-fr="Sélectionnez l'heure">Select Preferred Time</option>
-                <option value="9:00 AM">9:00 AM</option><option value="10:00 AM">10:00 AM</option><option value="11:00 AM">11:00 AM</option><option value="12:00 PM">12:00 PM</option><option value="1:00 PM">1:00 PM</option><option value="2:00 PM">2:00 PM</option><option value="3:00 PM">3:00 PM</option><option value="4:00 PM">4:00 PM</option><option value="5:00 PM">5:00 PM</option><option value="6:00 PM">6:00 PM</option><option value="7:00 PM">7:00 PM</option><option value="8:00 PM">8:00 PM</option>
-            </select>
-            <button type="submit" class="modal-capsule-btn" data-en="REQUEST SCHEDULED COMMITMENT" data-fr="DEMANDER UNE VISITE PLANIFIÉE">REQUEST SCHEDULED COMMITMENT</button>
-        </form>
-        <button class="modal-close" onclick="closeModals()" data-en="CANCEL" data-fr="ANNULER">CANCEL</button><br>
-        <button type="button" class="reset-user-link" id="resetUserBtnLater" onclick="resetUser()" data-en="Not you? Reset details" data-fr="Pas vous ? Réinitialiser" style="display:none;">Not you? Reset details</button>
     </div>
 </div>
 
@@ -498,9 +465,6 @@ function resetUser(){
     localStorage.removeItem('spur_applied_code');
     // Deliberately NOT removing spur_history so past receipts are preserved
     
-    const priceDisplay=document.getElementById('displayPrice');
-    if(priceDisplay)priceDisplay.textContent="$49.99 CAD";
-    
     if(document.getElementById('laterModal')&&document.getElementById('laterModal').style.display==='flex'){
         safeOpenModal('laterModal');
     }else{
@@ -541,10 +505,12 @@ async function handleSpurtanRegister(event){
     await syncClientToSupabase(name,phone,'Priority Match');
     submitBtn.disabled=false;
     submitBtn.textContent=ogText;
-    alert(lang==='fr'?"✓ Accès Spurtan Fondateur confirmé ! Votre tarif de 39,99 $ est actif pour votre première visite.":"✓ Founding Spurtan Access confirmed! Your $39.99 rate is active for your first visit.");
-    document.getElementById('displayPrice').textContent="$39.99 CAD";
+    alert(lang==='fr'?"✓ Accès Spurtan Fondateur confirmé !":"✓ Founding Spurtan Access confirmed!");
+    
+    // Do NOT alter pricing explicitly for Edge here as it's locked at $29.99 anyway,
+    // but code logic remains robust in the background.
     const sub=document.getElementById('dynamicHeroSubtitle');
-    if(sub){sub.textContent=lang==='fr'?"Bon retour, "+name.split(' ')[0]+".":"Welcome back, "+name.split(' ')[0]+".";}
+    if(sub){sub.textContent=lang==='fr'?"15 minutes. Zéro carte. Nous raffinons.":"15 minutes. Zero menus. We just refine.";}
     await updateLiveCounter();
     closeModals();
     form.reset();
@@ -605,8 +571,7 @@ async function handleCodeSubmit(event){
         }catch(e){}
     }
     localStorage.setItem('spur_applied_code',codeVal);
-    document.getElementById('displayPrice').textContent="$39.99 CAD";
-    alert(lang==='fr'?"✓ Remise appliquée !":"✓ Code applied! (-$10.00)");
+    alert(lang==='fr'?"✓ Code appliqué avec succès !":"✓ Code applied successfully!");
     closeModals();
     event.target.reset();
 }
@@ -627,7 +592,6 @@ async function handleSubmit(event,type){
     let phone=localStorage.getItem('spur_user_phone');
     const nameInput=form.querySelector('input[name="client_name"]');
     const phoneInput=form.querySelector('input[name="client_phone"]');
-    const occasionSelect=form.querySelector('select[name="client_occasion"]');
     
     const dateInput = form.querySelector('input[name="requested_date"]');
     const timeInput = form.querySelector('select[name="requested_time"]');
@@ -649,30 +613,10 @@ async function handleSubmit(event,type){
     
     const city=form.querySelector('.formCityField').value;
     const specialist=form.querySelector('input[name="requested_specialist"]')?.value||'Priority Match';
-    const occasion=occasionSelect&&occasionSelect.value?occasionSelect.value:'Standard Refresh';
+    const occasion="SPUR Edge (15-Min Refinement)";
     
-    let finalPrice=49.99;
-    let serviceRequested="SPUR Refresh";
-    let hasCode=localStorage.getItem('spur_applied_code')!==null;
-    
-    // DYNAMIC PRICING ENGINE
-    if(occasion.includes('SPUR Reset')){finalPrice=69.99;serviceRequested="SPUR Reset (Complete Hair & Beard Overhaul)";}
-    else if(occasion.includes('SPUR Edge')){finalPrice=29.99;serviceRequested="SPUR Edge (15-Min Refinement)";}
-    
-    if(hasCode&&finalPrice===49.99){
-        if(supabaseClient){
-            try{
-                const{count}=await supabaseClient.from('requests').select('*',{count:'exact',head:true}).eq('phone',phone);
-                if(count&&count>0){
-                    hasCode=false;
-                    localStorage.removeItem('spur_applied_code');
-                    localStorage.setItem('spur_discount_used','true');
-                    alert(lang==='fr'?"Note : Le tarif Fondateur est réservé à votre première visite. Votre total sera le tarif fixe prioritaire (49,99 $).":"Note: The Founding Spurtan rate applies to your first visit only. Your total will be the Priority Flat Rate ($49.99).");
-                }
-            }catch(e){}
-        }
-        if(hasCode) finalPrice=39.99;
-    }
+    let finalPrice=29.99;
+    let serviceRequested="SPUR Edge";
     
     if(document.getElementById('finalReceiptPrice')) document.getElementById('finalReceiptPrice').textContent=`$${finalPrice.toFixed(2)}`;
     if(document.getElementById('receiptName')) document.getElementById('receiptName').textContent = name.split(' ')[0].toUpperCase();
@@ -758,13 +702,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
         const savedName=localStorage.getItem('spur_user_name');
         const sub=document.getElementById('dynamicHeroSubtitle');
         if(savedName){
-            if(sub)sub.textContent=lang==='fr'?"On s'occupe de vous.":"Welcome back, "+savedName.split(' ')[0]+".";
-        }
-        
-        const hasCode=localStorage.getItem('spur_applied_code')!==null;
-        const usedCode=localStorage.getItem('spur_discount_used')==='true';
-        if(hasCode&&!usedCode){
-            document.getElementById('displayPrice').textContent="$39.99 CAD";
+            if(sub)sub.textContent=lang==='fr'?"15 minutes. Zéro carte. Nous raffinons.":"15 minutes. Zero menus. We just refine.";
         }
         
         setInterval(updateBadgeText,60000);
